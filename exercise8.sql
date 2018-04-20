@@ -86,4 +86,27 @@ SELECT *
 FROM dogs
 WHERE user_guid='ce225842-7144-11e5-ba71-058fbc01cf0b';
 
+#Question 10:
+%%sql
+SELECT COUNT(DISTINCT u.user_guid)
+FROM users u LEFT JOIN dogs d
+ON u.user_guid=d.user_guid
+WHERE d.user_guid IS NULL;
+
+#Question 11:
+%%sql
+SELECT COUNT(DISTINCT u.user_guid)
+FROM dogs d RIGHT JOIN users u
+ON d.user_guid=u.user_guid
+WHERE d.user_guid IS NULL;
+
+#Question 12:
+%%sql
+SELECT s.dog_guid AS SA_dogs_not_present_in_dogs_table, COUNT(*) AS 
+NumEntries
+FROM site_activities s LEFT JOIN dogs d
+ON s.dog_guid=d.dog_guid 
+WHERE d.dog_guid IS NULL AND s.dog_guid IS NOT NULL
+GROUP BY SA_dogs_not_present_in_dogs_table;
+
 
